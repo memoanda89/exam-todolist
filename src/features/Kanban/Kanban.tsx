@@ -42,6 +42,9 @@ function Kanban() {
   const [taskSelected, setTaskSelected] = useState<ITask>();
   const MINUTE_MS = 60000;
 //#endregion
+/**
+ *handlres para obtener las tareas 
+ */
     const handleGetTask = useCallback(() => {
       var list;
       dispatch(
@@ -57,7 +60,9 @@ function Kanban() {
         setComplete(task1.filter(c=> c.status==='Completed'))
        }
     }, []);
-
+/**
+ *funcion para obtener tareas y revisar el estatus de las tareas cada 60 min 
+ */
 useEffect(() => {
   handleGetTask();
   const interval = setInterval(() => {
@@ -69,22 +74,31 @@ useEffect(() => {
 
 
 
-
+/**
+ *handlres obtener una tarea por id
+ */
 function handleSelected(id:ITask): void {
   setIsOpenEditTask(true);
 
   setTaskSelected(id)
 }
-
+/**
+ *handle para cerrar el modal para agreagar tarea
+ */
 function handleCloseDialogAddTask() {
   setIsOpenAddTask(false);
   handleGetTask();
 }
-
+/**
+ *handler para crerrar el modal de edicion 
+ */
 function handleCloseDialogEditTask() {
   setIsOpenEditTask(false);
   handleGetTask();
 }
+/**
+ *handlres para borrar una tarea por id
+ */
 function handleDeleteOneTask(id:ITask) {
   
   dispatch(
@@ -93,6 +107,9 @@ function handleDeleteOneTask(id:ITask) {
  
   handleGetTask();
 }
+/**
+ *handlres para restaurar el tiempo de una tarea
+ */
 function handleRestartOneTask(id:ITask) {
   
   dispatch(
@@ -101,7 +118,9 @@ function handleRestartOneTask(id:ITask) {
  
   handleGetTask();
 }
-
+/**
+ *handlres para obtener las tareas 
+ */
   function handleAddRandomTask() {
     var test;
     dispatch(
